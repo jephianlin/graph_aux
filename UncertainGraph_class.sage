@@ -89,7 +89,21 @@ class UncertainGraph:
 
     def adjacency_matrix(self):
     	return self.ge.adjacency_matrix()-2*self.gu.complement().adjacency_matrix();
-    
+
+    def biadjacency_matrix(self,X,Y): 
+        a=len(X); # number of rows
+        b=len(Y); # number of columns
+        A=zero_matrix(a,b);
+        for i in range(a):
+            for j in range(b):
+                if self.ge.has_edge(X[i],Y[j]):
+                    A[i,j]=1;
+                elif self.gn.has_edge(X[i],Y[j]):
+                    A[i,j]=0;
+                else:
+                    A[i,j]=-2;
+        return A;
+
     def copy(self):
         g=UncertainGraph(self.ge,self.gn);
 	g.set_pos(self.pos);
