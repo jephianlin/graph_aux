@@ -90,7 +90,15 @@ class UncertainGraph:
     def adjacency_matrix(self):
     	return self.ge.adjacency_matrix()-2*self.gu.complement().adjacency_matrix();
 
-    def biadjacency_matrix(self,X,Y): 
+    def set_partition(self,[X,Y]):
+        self.par_X=X;
+        self.par_Y=Y;
+
+    def get_partition(self):
+        return [self.par_X,self.par_Y];
+
+    def biadjacency_matrix(self): 
+        X,Y=self.get_partition();
         a=len(X); # number of rows
         b=len(Y); # number of columns
         A=zero_matrix(a,b);
