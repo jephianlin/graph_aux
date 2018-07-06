@@ -90,9 +90,9 @@ class UncertainGraph:
     def adjacency_matrix(self):
     	return self.ge.adjacency_matrix()-2*self.gu.complement().adjacency_matrix();
 
-    def set_partition(self,[X,Y]):
-        self.par_X=X;
-        self.par_Y=Y;
+    def set_partition(self,par):
+        self.par_X=par[0];
+        self.par_Y=par[1];
 
     def get_partition(self):
         return [self.par_X,self.par_Y];
