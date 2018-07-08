@@ -78,9 +78,9 @@ class UncertainGraph:
             kwargs.pop("pos");
         from sage.graphs.graph_plot import graphplot_options
         plot_kwds = {k:kwargs.pop(k) for k in graphplot_options if k in kwargs}
-        ge_draw=self.ge.graphplot(pos=new_pos,**plot_kwds).plot(**kwargs);
-        gn_draw=self.gn.graphplot(pos=new_pos,edge_style="dashed",**plot_kwds).plot(**kwargs);
-        gu_draw=self.gu.complement().graphplot(pos=new_pos,edge_color="gray",**plot_kwds).plot(**kwargs);
+        ge_draw=self.ge.graphplot(pos=new_pos,edge_thickness=2,**plot_kwds).plot(**kwargs);
+        gn_draw=self.gn.graphplot(pos=new_pos,edge_thickness=2,edge_style="dashed",**plot_kwds).plot(**kwargs);
+        gu_draw=self.gu.complement().graphplot(pos=new_pos,edge_color="lightgray",**plot_kwds).plot(**kwargs);
         pic=gu_draw+ge_draw+gn_draw;
         pic.show(axes=False);
 
@@ -98,7 +98,11 @@ class UncertainGraph:
         return [self.par_X,self.par_Y];
 
     def biadjacency_matrix(self): 
-        X,Y=self.get_partition();
+        try:
+            X,Y=self.get_partition();
+        except:
+            print "Partition not set up; do g.set_partition([X,Y]) first.";
+            return None;
         a=len(X); # number of rows
         b=len(Y); # number of columns
         A=zero_matrix(a,b);
