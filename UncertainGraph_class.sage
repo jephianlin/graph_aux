@@ -48,7 +48,12 @@ class UncertainGraph:
         self.ge.add_vertex(v);
         self.gn.add_vertex(v);
         self.update_gunion();
-    
+
+    def delete_vertex(self,v):
+        self.ge.delete_vertex(v);
+        self.gn.delete_vertex(v);
+        self.update_gunion();
+	
     def add_edge(self,i,j):
         self.ge.add_edge(i,j);
         if self.gn.has_edge(i,j):
@@ -67,7 +72,11 @@ class UncertainGraph:
         if self.gn.has_edge(i,j):
             self.gn.delete_edge(i,j);
         self.update_gunion();
-        
+
+    def make_all_uncertain_to_nonedge(self):
+	self.gn=self.ge.complement();
+	self.update_gunion();
+	
     def show(self,**kwargs):
         if "pos" not in kwargs.keys():
             new_pos=self.pos;
