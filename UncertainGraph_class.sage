@@ -73,6 +73,10 @@ class UncertainGraph:
             self.gn.delete_edge(i,j);
         self.update_gunion();
 
+    def make_all_uncertain_to_edge(self):
+	self.ge=self.gn.complement();
+	self.update_gunion();	
+	
     def make_all_uncertain_to_nonedge(self):
 	self.gn=self.ge.complement();
 	self.update_gunion();
@@ -127,5 +131,10 @@ class UncertainGraph:
 
     def copy(self):
         g=UncertainGraph(self.ge,self.gn);
+	g.set_pos(self.pos);
+	return g;
+
+    def complement(self):
+	g=UncertainGraph(self.gn,self.ge);
 	g.set_pos(self.pos);
 	return g;
