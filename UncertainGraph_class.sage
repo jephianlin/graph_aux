@@ -50,9 +50,9 @@ class UncertainGraph:
         self.update_gunion();
 
     def delete_vertex(self,v):
-	ge.set_pos(self.get_pos());
+	self.ge.set_pos(self.get_pos());
         self.ge.delete_vertex(v);
-	self.set_pos(ge.get_pos());
+	self.set_pos(self.ge.get_pos());
         self.gn.delete_vertex(v);
         self.update_gunion();
 	
